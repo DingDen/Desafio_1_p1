@@ -31,23 +31,34 @@ Restrições:
 0.0 ≤ Pos < dPista e 0.0 < Carga < 100.0
 '''
 
-entrada = input().split(" ") # 4 10.000 (mesma linha)
-n_baterias = int(entrada[0])
-dist = float(entrada[1])
+while True:
+    entrada = input().split(" ") # 4 10.000 (mesma linha)
+    n_baterias = int(entrada[0])
+    dist = float(entrada[1])
+    if (n_baterias >= 1 and n_baterias <= 1000) and (dist >= 1 and dist <= 10000): #Restrição
+        break
+
 bat_pos = []
 bat_car = []
 
+print('\n')
 for i in range(n_baterias):
-    entrada = input().split(" ")    
-    # 0.000  1.000  
-    # 1.200  0.100
-    # 3.000  10.000
-    # 7.700  1.000 
-    bat_pos.append(float(entrada[0]))
-    bat_car.append(float(entrada[1]))
+    while True:
+        entrada = input().split(" ")    
+        pos = float(entrada[0])
+        carga = float(entrada[1])
+        # 0.000  1.000  
+        # 1.200  0.100
+        # 3.000  10.000
+        # 7.700  1.000
+        if (0 <= pos and pos < dist) and (0 < carga and carga < 100):  # Restrição
+            break
+    bat_pos.append(pos)     #Armazenar a posição
+    bat_car.append(carga)   #Armazenar a carga
 
 bat_pos.append(dist)    # Armazenar a distância final
 
+#Declaração das variáveis
 tempo = 0
 aux_tempo = 0
 
