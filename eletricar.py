@@ -31,20 +31,22 @@ Restrições:
 0.0 ≤ Pos < dPista e 0.0 < Carga < 100.0
 '''
 
-dmax = 0
-
-entrada = input().split(" ") # 4 10.000
+entrada = input().split(" ") # 4 10.000 (mesma linha)
 n_baterias = int(entrada[0])
 dist = float(entrada[1])
 bat_pos = []
 bat_car = []
 
 for i in range(n_baterias):
-    entrada = input().split(" ")
+    entrada = input().split(" ")    
+    # 0.000  1.000  
+    # 1.200  0.100
+    # 3.000  10.000
+    # 7.700  1.000 
     bat_pos.append(float(entrada[0]))
     bat_car.append(float(entrada[1]))
 
-bat_pos.append(dist)
+bat_pos.append(dist)    # Armazenar a distância final
 
 tempo = 0
 aux_tempo = 0
@@ -53,22 +55,22 @@ pivo_pos = 0
 pivo_tempo = 0
 tot_tempo = 0
 
-def calcTime(pos_init, pos_end, carga):
+def calcTime(pos_init, pos_end, carga): # Função para calcular o tempo
     diff_pos = pos_end - pos_init
     velocity = carga / diff_pos
     return diff_pos / velocity
 
-for i in range(n_baterias):
+for i in range(n_baterias):       # Comparação de tempo
     tempo = calcTime(bat_pos[i], bat_pos[i+1], bat_car[i])
     aux_tempo = calcTime(bat_pos[pivo_pos], bat_pos[i+1], bat_car[pivo_pos])
 
-    if tempo <= aux_tempo: 
+    if tempo <= aux_tempo:  # Guardar posição
         pivo_pos = i
-    else:
+    else:                   # Guardar tempo
         pivo_tempo = aux_tempo
 
     if tempo <= aux_tempo or i == n_baterias-1:
         tot_tempo += pivo_tempo
         pivo_tempo = tempo
 
-print("%.3f" % tot_tempo)
+print(f"{tot_tempo:.3f}")
